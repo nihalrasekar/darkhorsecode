@@ -1,0 +1,43 @@
+{
+  "name": "darkhorsecode",
+  "version": "0.1.0",
+  "description": "DarkHorseCode — agentic coding UI",
+  "main": "./out/main/index.mjs",
+  "author": "nihalrasekar",
+  "license": "MIT",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "typecheck": "electron-vite typecheck",
+    "test": "node --test \"src/**/*.test.mjs\"",
+    "dist": "electron-vite build && electron-builder --win",
+    "dist:mac": "electron-vite build && electron-builder --mac",
+    "dist:linux": "electron-vite build && electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.darkhorsecode.app",
+    "productName": "DarkHorseCode",
+    "directories": { "output": "release" },
+    "files": ["out/**/*"],
+    "win": { "target": "nsis", "icon": "resources/icon.png" },
+    "mac": { "target": "dmg", "icon": "resources/icon.png" },
+    "linux": { "target": "AppImage", "icon": "resources/icon.png" }
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "^0.85.1",
+    "lucide-react": "^0.460.0",
+    "opencode-ai": "^1.18.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.0",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^3.0.0",
+    "tailwindcss": "^4.0.0",
+    "vite": "^6.0.0"
+  }
+}
