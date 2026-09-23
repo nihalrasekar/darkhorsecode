@@ -77,10 +77,7 @@ const api = {
     login: (provider) => ipcRenderer.invoke('auth:login', provider),
     logout: (provider) => ipcRenderer.invoke('auth:logout', provider),
     cancel: (provider) => ipcRenderer.invoke('auth:cancel', provider),
-    answer: (requestId, value) => ipcRenderer.invoke('auth:answer', { requestId, value }),
     onEvent: on('auth:event'),
-    onPrompt: on('auth:prompt'),
-    onPromptClosed: on('auth:prompt-closed'),
     onDone: on('auth:done')
   },
   architecture: {

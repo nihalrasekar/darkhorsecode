@@ -12,7 +12,6 @@ jobs:
       matrix:
         include:
           - { os: windows-latest, name: Windows, flag: --win }
-          - { os: macos-latest, name: macOS, flag: --mac }
           - { os: ubuntu-latest, name: Linux, flag: --linux }
     runs-on: ${{ matrix.os }}
     steps:
@@ -28,5 +27,4 @@ jobs:
           name: DarkHorseCode-${{ matrix.name }}
           path: |
             release/*.exe
-            release/*.dmg
             release/*.AppImage

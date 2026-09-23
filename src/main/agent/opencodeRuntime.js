@@ -7,7 +7,6 @@ import fs from 'fs'
 import path from 'path'
 import { buildConfig } from './config'
 import { getSettings, providerEnvVars, workspaceDir, hasApiKey, getApiKey } from './store'
-import { oauthEnvVars } from './auth'
 
 const HOSTNAME = '127.0.0.1'
 
@@ -36,14 +35,10 @@ async function resolvePort() {
 
 export function resolveBinary() {
   if (process.env.OPENCODE_BIN_PATH) return process.env.OPENCODE_BIN_PATH
-  const candidates = [
-    path.join(app.getAppPath(), 'node_modules', 'opencode-ai', 'bin', 'opencode.exe'),
-    path.join(process.resourcesPath, 'opencode', 'opencode.exe')
-  ]
-  for (const c of candidates) {
-    if (fs.existsSync(c)) return c
-  }
-  return candidates[0]
+  // Executables can't be spawned from inside app.asar; asarUnpack puts it beside it.
+  return path
+    .join(app.getAppPath(), 'node_modules', 'opencode-ai', 'bin', 'opencode.exe')
+    .replace('app.asar', 'app.asar.unpacked')
 }
 
 function keepEnv() {
@@ -116,7 +111,6 @@ export class OpenCodeRuntime extends EventEmitter {
 
   async _env() {
     const settings = getSettings()
-    const oauth = await oauthEnvVars()
     return {
       ...keepEnv(),
       OPENCODE_CONFIG_CONTENT: JSON.stringify(
@@ -129,8 +123,7 @@ export class OpenCodeRuntime extends EventEmitter {
       OPENCODE_ENABLE_EXA: '1',
       OPENCODE_ENABLE_PARALLEL: '1',
       OPENCODE_SERVER_PASSWORD: this.password,
-      ...providerEnvVars(),
-      ...oauth
+      ...providerEnvVars()
     }
   }
 

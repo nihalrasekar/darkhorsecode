@@ -258,7 +258,7 @@ export default function Settings() {
     setAuthBusy((b) => ({ ...b, [provider]: true }))
     try {
       const res = await window.api.auth.login(provider)
-      if (res?.ok) toast(`Signed in. Agent restarting with your ${provider === 'anthropic' ? 'Claude' : 'ChatGPT'} subscription…`, 'success')
+      if (res?.ok) toast(`Signed in. Agent restarting with your ChatGPT subscription…`, 'success')
     } catch (err) {
       toast(err.message || 'Sign-in failed', 'error')
     } finally {

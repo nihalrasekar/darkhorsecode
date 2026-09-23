@@ -55,7 +55,7 @@ export default function Sidebar({ route, onNavigate, collapsed, onToggleCollapse
       }`}
     >
       <div className="flex h-14 items-center gap-2.5 border-b border-line px-4">
-        <img src="/icon.png" alt="DarkHorseCode" className="h-7 w-7 shrink-0 rounded-md" />
+        <img src="./icon.png" alt="DarkHorseCode" className="h-7 w-7 shrink-0 rounded-md" />
         {!collapsed && (
           <div className="min-w-0 leading-tight">
             <div className="truncate font-mono text-sm font-semibold tracking-tight text-zinc-100">

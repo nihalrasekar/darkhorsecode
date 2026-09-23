@@ -204,6 +204,17 @@ export default function Docs() {
         </p>
       </div>
 
+      <div className="rounded-lg border border-line bg-panel px-4 py-3.5">
+        <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-faint">What's under the hood</div>
+        <p className="text-[13px] leading-relaxed text-muted">
+          DarkHorseCode is built on the <span className="font-medium text-zinc-200">opencode</span> engine: every
+          agent runs on a local opencode server. ChatGPT sign-in uses opencode's own login (
+          <code className="text-[11px] text-faint">opencode providers login</code>), not an OAuth flow of our own, and the
+          token is saved in opencode's auth.json. Claude has no sign-in here: Anthropic rejects a Claude Pro/Max login
+          token when a third-party app uses it, so Claude needs an API key.
+        </p>
+      </div>
+
       <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-[13px] text-zinc-200">
         <span className="font-medium text-accent">New here?</span> Go to <span className="font-medium">New App</span>, describe what to build, then pick a model below — <span className="font-medium">OpenCode → Big Pickle</span> is the fastest free path to a working agent, no card required.
       </div>

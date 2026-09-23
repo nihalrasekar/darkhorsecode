@@ -81,7 +81,7 @@ export default function Home({ onStartBuild, project }) {
     <div className="flex h-full flex-col items-center overflow-y-auto px-6 py-10">
       <div className="w-full max-w-2xl">
         <div className="text-center">
-          <img src="/icon.png" alt="DarkHorseCode" className="mx-auto mb-3 h-28 w-28 rounded-2xl" />
+          <img src="./icon.png" alt="DarkHorseCode" className="mx-auto mb-3 h-28 w-28 rounded-2xl" />
           <h2 className="text-xl font-semibold tracking-tight text-zinc-100">
             Describe your idea, build a production-ready app
           </h2>

@@ -21,7 +21,7 @@ export function ToastProvider({ children }) {
     (message, tone = 'info', duration = 3200) => {
       const id = ++idRef.current
       setToasts((t) => [...t, { id, message, tone }])
-      setTimeout(() => dismiss(id), duration)
+      if (tone !== 'error') setTimeout(() => dismiss(id), duration)
       return id
     },
     [dismiss]
@@ -40,7 +40,7 @@ export function ToastProvider({ children }) {
               className={`pointer-events-auto flex items-start gap-2.5 rounded-lg border px-3.5 py-2.5 text-[13px] shadow-lg backdrop-blur-sm animate-[toast-in_0.18s_ease-out] ${meta.color} bg-panel/95`}
             >
               <Icon size={15} className="mt-0.5 shrink-0" />
-              <span className="flex-1 text-zinc-100">{t.message}</span>
+              <span className="selectable-text flex-1 break-words text-zinc-100">{t.message}</span>
               <button
                 onClick={() => dismiss(t.id)}
                 className="shrink-0 text-faint hover:text-zinc-300"

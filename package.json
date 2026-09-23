@@ -12,20 +12,32 @@
     "typecheck": "electron-vite typecheck",
     "test": "node --test \"src/**/*.test.mjs\"",
     "dist": "electron-vite build && electron-builder --win",
-    "dist:mac": "electron-vite build && electron-builder --mac",
     "dist:linux": "electron-vite build && electron-builder --linux"
   },
   "build": {
     "appId": "com.darkhorsecode.app",
     "productName": "DarkHorseCode",
-    "directories": { "output": "release" },
-    "files": ["out/**/*"],
-    "win": { "target": "nsis", "icon": "resources/icon.png" },
-    "mac": { "target": "dmg", "icon": "resources/icon.png" },
-    "linux": { "target": "AppImage", "icon": "resources/icon.png" }
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "resources/icon.png",
+      "!node_modules/opencode-{windows,linux,darwin}-*/**"
+    ],
+    "asarUnpack": [
+      "node_modules/opencode-ai/bin/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "resources/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "resources/icon.png"
+    }
   },
   "dependencies": {
-    "@earendil-works/pi-ai": "^0.85.1",
     "lucide-react": "^0.460.0",
     "opencode-ai": "^1.18.31",
     "react": "^18.3.1",
