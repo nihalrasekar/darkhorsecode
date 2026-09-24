@@ -35,10 +35,11 @@ async function resolvePort() {
 
 export function resolveBinary() {
   if (process.env.OPENCODE_BIN_PATH) return process.env.OPENCODE_BIN_PATH
-  // Executables can't be spawned from inside app.asar; asarUnpack puts it beside it.
-  return path
-    .join(app.getAppPath(), 'node_modules', 'opencode-ai', 'bin', 'opencode.exe')
-    .replace('app.asar', 'app.asar.unpacked')
+  // Packaged: shipped via extraResources, since electron-builder strips *.exe from
+  // node_modules on non-Windows builds (opencode-ai names its binary .exe everywhere).
+  return app.isPackaged
+    ? path.join(process.resourcesPath, 'opencode.exe')
+    : path.join(app.getAppPath(), 'node_modules', 'opencode-ai', 'bin', 'opencode.exe')
 }
 
 // opencode's data dir (auth.json, MCP tokens) lives under our userData instead of the

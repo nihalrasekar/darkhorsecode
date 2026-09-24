@@ -23,10 +23,11 @@
     "files": [
       "out/**/*",
       "resources/icon.png",
-      "!node_modules/opencode-{windows,linux,darwin}-*/**"
+      "!node_modules/opencode-{windows,linux,darwin}-*/**",
+      "!node_modules/opencode-ai/bin/**"
     ],
-    "asarUnpack": [
-      "node_modules/opencode-ai/bin/**"
+    "extraResources": [
+      { "from": "node_modules/opencode-ai/bin/opencode.exe", "to": "opencode.exe" }
     ],
     "win": {
       "target": "nsis",
