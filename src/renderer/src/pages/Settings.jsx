@@ -254,6 +254,18 @@ export default function Settings() {
     }
   }
 
+  // The saved key isn't in the draft (settings:get never sends it), so fetch it on first reveal.
+  const toggleShowKey = async () => {
+    if (!showKey && apiKeySet && !apiKeyDraft) {
+      try {
+        setApiKeyDraft(await window.api.settings.revealKey())
+      } catch (err) {
+        toast(err.message, 'error')
+      }
+    }
+    setShowKey((v) => !v)
+  }
+
   const signIn = async (provider) => {
     setAuthBusy((b) => ({ ...b, [provider]: true }))
     try {
@@ -620,7 +632,7 @@ export default function Settings() {
                     onChange={(e) => setApiKeyDraft(e.target.value)}
                     placeholder={apiKeySet ? 'sk-••••••••••••••••' : 'sk-…'}
                   />
-                  <Button variant="outline" size="sm" onClick={() => setShowKey((v) => !v)} className="h-9 shrink-0">
+                  <Button variant="outline" size="sm" onClick={toggleShowKey} className="h-9 shrink-0">
                     <Eye size={13} />
                   </Button>
                   {apiKeySet && (

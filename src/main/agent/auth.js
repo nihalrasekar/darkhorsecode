@@ -1,9 +1,8 @@
 import { shell, ipcMain } from 'electron'
 import { spawn } from 'child_process'
 import fs from 'fs'
-import os from 'os'
 import path from 'path'
-import { resolveBinary } from './opencodeRuntime'
+import { resolveBinary, dataHome } from './opencodeRuntime'
 
 // Claude Pro/Max sign-in is intentionally absent — Anthropic rejects that subscription
 // token for third-party API calls, so Claude runs only with a real API key.
@@ -23,8 +22,11 @@ export const OAUTH_PROVIDERS = {
 }
 
 function opencodeAuthPath() {
-  return path.join(os.homedir(), '.local', 'share', 'opencode', 'auth.json')
+  return path.join(dataHome(), 'opencode', 'auth.json')
 }
+
+// Login/logout must hit the same data dir the runtime uses.
+const cliEnv = () => ({ ...process.env, XDG_DATA_HOME: dataHome() })
 
 function readOpencodeAuth() {
   try {
@@ -48,7 +50,8 @@ function loginViaOpencodeCli(method, { signal, notify }) {
   return new Promise((resolve, reject) => {
     const child = spawn(resolveBinary(), ['providers', 'login', '-p', 'openai', '-m', method], {
       stdio: ['ignore', 'pipe', 'pipe'],
-      windowsHide: true
+      windowsHide: true,
+      env: cliEnv()
     })
     let buffer = ''
     let urlSent = false
@@ -85,7 +88,7 @@ function loginViaOpencodeCli(method, { signal, notify }) {
 
 function logoutViaOpencodeCli() {
   return new Promise((resolve, reject) => {
-    const child = spawn(resolveBinary(), ['providers', 'logout', 'openai'], { stdio: 'ignore', windowsHide: true })
+    const child = spawn(resolveBinary(), ['providers', 'logout', 'openai'], { stdio: 'ignore', windowsHide: true, env: cliEnv() })
     child.on('error', reject)
     child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`Sign-out failed (exit ${code})`))))
   })

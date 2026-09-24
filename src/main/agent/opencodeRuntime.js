@@ -41,6 +41,12 @@ export function resolveBinary() {
     .replace('app.asar', 'app.asar.unpacked')
 }
 
+// opencode's data dir (auth.json, MCP tokens) lives under our userData instead of the
+// shared ~/.local/share/opencode, so uninstall wipes the credentials with the app.
+export function dataHome() {
+  return app.getPath('userData')
+}
+
 function keepEnv() {
   const keep = [
     'PATH', 'PATHEXT', 'COMSPEC', 'SystemRoot', 'WINDIR', 'USERPROFILE',
@@ -113,6 +119,7 @@ export class OpenCodeRuntime extends EventEmitter {
     const settings = getSettings()
     return {
       ...keepEnv(),
+      XDG_DATA_HOME: dataHome(),
       OPENCODE_CONFIG_CONTENT: JSON.stringify(
         buildConfig(settings, hasApiKey(), this.resolveRulesPath(settings.customRules), getApiKey())
       ),

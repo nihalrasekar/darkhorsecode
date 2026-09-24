@@ -32,6 +32,9 @@
       "target": "nsis",
       "icon": "resources/icon.png"
     },
+    "nsis": {
+      "deleteAppDataOnUninstall": true
+    },
     "linux": {
       "target": "AppImage",
       "icon": "resources/icon.png"

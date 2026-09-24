@@ -210,7 +210,8 @@ export default function Docs() {
           DarkHorseCode is built on the <span className="font-medium text-zinc-200">opencode</span> engine: every
           agent runs on a local opencode server. ChatGPT sign-in uses opencode's own login (
           <code className="text-[11px] text-faint">opencode providers login</code>), not an OAuth flow of our own, and the
-          token is saved in opencode's auth.json. Claude has no sign-in here: Anthropic rejects a Claude Pro/Max login
+          token is saved in the app's own data folder, not shared with other opencode installs. Uninstalling on Windows
+          deletes that folder, along with your API keys and sign-ins. Updating keeps them. Claude has no sign-in here: Anthropic rejects a Claude Pro/Max login
           token when a third-party app uses it, so Claude needs an API key.
         </p>
       </div>

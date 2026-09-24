@@ -8,7 +8,7 @@ import {
   permissionSummary,
   questionSummary
 } from './events'
-import { getSettings, saveSettings, hasApiKey, recentProjects, workspaceDir } from './store'
+import { getSettings, saveSettings, hasApiKey, getApiKey, recentProjects, workspaceDir } from './store'
 import { getSystemSpecs } from './systemSpecs'
 import { readArchitecture } from './architect'
 import { registerAuthHandlers, isOAuthConfiguredSync } from './auth'
@@ -276,6 +276,9 @@ export function registerAgent() {
     const s = getSettings()
     return { settings: s, apiKeySet: hasApiKey() }
   })
+
+  // Only on an explicit eye-click — settings:get never sends the decrypted key.
+  ipcMain.handle('settings:reveal-key', () => getApiKey())
 
   ipcMain.handle('settings:save', async (_e, partial) => {
     const result = saveSettings(partial)

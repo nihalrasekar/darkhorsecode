@@ -66,7 +66,8 @@ const api = {
   },
   settings: {
     get: () => ipcRenderer.invoke('settings:get'),
-    save: (partial) => ipcRenderer.invoke('settings:save', partial)
+    save: (partial) => ipcRenderer.invoke('settings:save', partial),
+    revealKey: () => ipcRenderer.invoke('settings:reveal-key')
   },
   system: {
     specs: () => ipcRenderer.invoke('system:specs'),
