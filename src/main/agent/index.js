@@ -93,13 +93,15 @@ export function registerAgent() {
   ipcMain.handle('agent:status', () => {
     const oauth = isOAuthConfiguredSync()
     const apiKey = hasApiKey()
+    // opencode's built-in Big Pickle is the only model that runs with no key.
+    const keyless = getSettings().model === 'opencode/big-pickle'
     return {
       running: Boolean(runtime.child),
       ready: runtime.ready,
       port: runtime.port,
       hasApiKey: apiKey,
       // A provider is usable via a manual API key OR an OAuth sign-in.
-      hasCredentials: apiKey || Object.keys(oauth).length > 0,
+      hasCredentials: apiKey || keyless || Object.keys(oauth).length > 0,
       credentials: { apiKey, oauth }
     }
   })
