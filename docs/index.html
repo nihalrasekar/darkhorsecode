@@ -270,10 +270,6 @@
   .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 9px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--muted); }
   .row:first-of-type { border-top: 0; }
   .row .keys { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
-  .facts { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  .facts .row { padding: 14px 18px; background: var(--panel); align-items: flex-start; }
-  .facts .row b { color: var(--strong); font-weight: 600; min-width: 160px; }
-  .facts .row span { text-align: right; }
 
   .story { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 28px; background: radial-gradient(ellipse at top left, var(--accent-soft), transparent 60%), var(--panel); }
   .story img { width: 96px; height: 96px; border-radius: 20px; animation: bob 6s ease-in-out infinite; }
@@ -300,7 +296,6 @@
     .chat { border-right: 0; border-bottom: 1px solid var(--line); }
     .top-links .hide-sm { display: none; }
     .story { grid-template-columns: 1fr; }
-    .facts .row { flex-direction: column; gap: 4px; } .facts .row span { text-align: left; }
     main { gap: 64px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -399,7 +394,6 @@
     <span class="label">Configure</span>
     <a href="#models">Models</a>
     <a href="#shortcuts">Shortcuts</a>
-    <a href="#data">Data &amp; sign-in</a>
     <a href="#name">The name</a>
   </nav>
 
@@ -658,21 +652,6 @@
           <div class="row">Parent / child element <span class="keys"><kbd>↑</kbd><kbd>↓</kbd></span></div>
           <div class="row">Cancel picking <span class="keys"><kbd>Esc</kbd></span></div>
         </div>
-      </div>
-    </section>
-
-    <section id="data">
-      <div class="head reveal">
-        <span class="eyebrow">Under the hood</span>
-        <h2>Data &amp; sign-in</h2>
-        <p class="lede">Every agent runs on a local <a href="https://opencode.ai">opencode</a> server. DarkHorseCode does not run its own OAuth flow.</p>
-      </div>
-      <div class="facts reveal">
-        <div class="row"><b>ChatGPT sign-in</b><span>Runs <code>opencode providers login -p openai</code></span></div>
-        <div class="row"><b>Token location</b><span><code>%APPDATA%\darkhorsecode\opencode\auth.json</code>, not shared with other opencode installs</span></div>
-        <div class="row"><b>Updating</b><span>Keeps your API keys, MCP tokens and sign-ins</span></div>
-        <div class="row"><b>Uninstalling (Windows)</b><span>Deletes <code>%APPDATA%\darkhorsecode</code> along with keys and sign-ins</span></div>
-        <div class="row"><b>Claude</b><span>No sign-in. Needs an API key from console.anthropic.com</span></div>
       </div>
     </section>
 
