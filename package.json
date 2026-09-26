@@ -34,10 +34,12 @@
       "icon": "resources/icon.png"
     },
     "nsis": {
-      "deleteAppDataOnUninstall": true
+      "deleteAppDataOnUninstall": true,
+      "artifactName": "DarkHorseCode.${ext}"
     },
     "linux": {
       "target": "AppImage",
+      "artifactName": "DarkHorseCode.${ext}",
       "icon": "resources/icon.png"
     }
   },
