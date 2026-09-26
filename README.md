@@ -91,14 +91,7 @@ Other commands:
 | `npm run dist` | Build the Windows installer into `release/` |
 | `npm run dist:linux` | Build the Linux AppImage into `release/` |
 
-### Publishing a new version
 
-Push a version tag. GitHub Actions builds both files and attaches them to a new release:
-
-```bash
-git tag v0.1.1
-git push origin v0.1.1
-```
 
 ## Sign-in and your data
 
