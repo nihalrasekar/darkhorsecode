@@ -17,6 +17,11 @@
   <a href="https://github.com/nihalrasekar/darkhorsecode/releases">All versions</a>
 </p>
 
+<p align="center">
+  <a href="docs/darkhorsecode-promo.mp4"><img src="docs/darkhorsecode-promo.gif" width="800" alt="DarkHorseCode promo: describe an app, agents build it"></a>
+  <br><sub>Click for the full-quality video</sub>
+</p>
+
 ---
 
 ## Download and run
